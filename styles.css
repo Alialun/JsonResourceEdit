@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: #ffffff;
+    margin: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  #fileInput {
+    display: block;
+    margin: 20px auto;
+  }
+  
+  #translationGrid {
+    width: 80%;
+    margin: 20px;
+  }
+  
+  #exportBtn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  /* Entire Handsontable container */
+.handsontable {
+  background-color: black !important;
+  color: white !important;
+  border-color: #444 !important;
+}
+
+/* Regular cells */
+.handsontable td {
+  background-color: black !important;
+  color: white !important;
+  border-color: #444 !important;
+}
+
+/* Header cells (top row and left col) */
+.handsontable th {
+  background-color: #222 !important;
+  color: white !important;
+  border-color: #444 !important;
+  font-weight: bold;
+}
+
+/* Selected or focused cell */
+.handsontable td.current,
+.handsontable td.highlight,
+.handsontable td.area,
+.handsontable td.focus {
+  background-color: #222 !important;
+  color: white !important;
+}
+
+/* Context menu */
+.htContextMenu {
+  background-color: #111 !important;
+  color: white !important;
+}
+
+.htContextMenu .ht_master .htCore td {
+  background-color: #111 !important;
+  color: white !important;
+}
+
+.htContextMenu .ht_master .htCore td:hover {
+  background-color: #222 !important;
+}
+
+/* Force .wtHolder to stretch and match background */
+.handsontable .wtHolder {
+  background-color: #111 !important;
+}
+
+/* Also fix inner scroll "corner" (bottom-right corner space) */
+.handsontable .wtHolder .ht_master .wtHider {
+  background-color: #111 !important;
+}
+
+
+/* Duplicate and missing override colors still apply */
+/* FIX: Stronger selectors to override generic dark mode styles */
+.handsontable td.htDuplicate {
+  background-color: #b30000 !important;
+  color: white !important;
+}
+
+.handsontable td.htMissing {
+  background-color: #830000 !important;
+  color: white !important;
+}

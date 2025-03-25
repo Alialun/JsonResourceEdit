@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSON Resources Editor</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Handsontable CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@12.0/dist/handsontable.full.min.css">
+</head>
+<body>
+  <h1>JSON Resources Editor</h1>
+  <input type="file" id="fileInput" multiple accept=".json">
+  <div id="translationGrid"></div>
+  <button id="exportBtn">Export Translations</button>
+
+  <!-- Handsontable JS -->
+  <script src="https://cdn.jsdelivr.net/npm/handsontable@12.0/dist/handsontable.full.min.js"></script>
+  <!-- JSZip for ZIP file creation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
