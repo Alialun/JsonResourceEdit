@@ -83,33 +83,35 @@ document.addEventListener('DOMContentLoaded', () => {
         dropdownMenu: true,
         minSpareRows: 1,
         licenseKey: 'non-commercial-and-evaluation',
-  
-        cells: function (row, col) {
-            const cellProperties = {};
-            const key = this.instance.getDataAtCell(row, 0);
-            const value = this.instance.getDataAtCell(row, col);
-            const totalRows = this.instance.countRows();
-          
-            // 🛑 Skip spare row (ephemeral row at the bottom)
+        
+        columns: colHeaders.map((header, colIndex) => ({
+          renderer: function (instance, td, row, col, prop, value, cellProperties) {
+            // 💣 Remove all dynamic classes first
+            td.classList.remove('htMissing', 'htDuplicate');
+        
+            const key = instance.getDataAtCell(row, 0);
+            const totalRows = instance.countRows();
             const isSpareRow = row === totalRows - 1;
-          
-            // 🔴 Highlight duplicate keys (column 0)
+        
+            // 🔴 Apply missing if needed
+            if (col > 0 && !isSpareRow && (!value || value.trim() === '')) {
+              td.classList.add('htMissing');
+            }
+        
+            // 🔴 Apply duplicate if needed
             if (col === 0 && !isSpareRow) {
-              const allKeys = this.instance.getDataAtCol(0);
+              const allKeys = instance.getDataAtCol(0);
               const duplicates = allKeys.filter(k => k === key);
               if (key && duplicates.length > 1) {
-                cellProperties.className = 'htDuplicate';
+                td.classList.add('htDuplicate');
               }
             }
-          
-            // 🔴 Highlight empty translations (columns > 0)
-            if (col > 0 && !isSpareRow && (!value || value.trim() === '')) {
-              cellProperties.className = (cellProperties.className || '') + ' htMissing';
-            }
-          
-            return cellProperties;
-          },
-                   
+        
+            // 🧼 Finally render the text
+            Handsontable.renderers.TextRenderer.apply(this, arguments);
+          }
+        })),
+        
   
         afterChange: (changes, source) => {
           if (source === 'edit' && changes) {
@@ -162,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!key) return;
   
         fileNames.forEach((file, index) => {
+          if(!row[index + 1]) return;
           newTranslations[file][key] = row[index + 1] || '';
         });
       });
